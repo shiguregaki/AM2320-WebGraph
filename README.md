@@ -1,4 +1,5 @@
 AM2320-WebGraph
+
 ---
 English
 ---
@@ -8,6 +9,7 @@ I created a web graph that shows the value of the AM2320 sensor in arudino wifi 
 Japanese
 ---
 ‚±‚ÌƒR[ƒh‚Íarudino wifiƒ‚ƒWƒ…[ƒ‹‚ÌESP8266‚ÅAM2320‚ðWebƒOƒ‰ƒt‰»‚·‚é‚à‚Ì‚Å‚·B
+AM2320ƒZƒ“ƒT[‚ðƒhƒ‰ƒCƒ„[‚Å‰·‚ß‚Ä‚¨‚èA‚»‚ê‚ªƒŠƒAƒ‹ƒ^ƒCƒ€‚É•\Ž¦‚³‚ê‚Ä‚¢‚Ü‚·B
 
 ![demo](https://github.com/shiguregaki/AM2320-WebGraph/blob/master/docs/display_AM2320_sensor.gif)
 
@@ -77,7 +79,7 @@ AM2320ƒZƒ“ƒT[‚ð§Œä‚Å‚«‚éƒ‰ƒCƒuƒ‰ƒŠ[‚Å‚·B
 
 ## —˜—p‚µ‚Ä‚¢‚éƒ\ƒtƒgƒEƒFƒA
 ˆÈ‰º‚Ìƒ\ƒtƒgƒEƒFƒA‚Íƒ\[ƒXƒR[ƒh“à‚É‘g‚Ýž‚Ü‚ê‚Ä‚¢‚Ü‚·B
-‚»‚Ì‚½‚ßA•Ê“rƒCƒ“ƒXƒg[ƒ‹‚Í•K—v‚Í‚ ‚è‚Ü‚¹‚ñ‚ªAÅV”Å‚Ì‚à‚Ì‚ª‚ ‚ê‚Î•Ê“r’u‚«Š·‚¦‚Ä—˜—p‚·‚é‚±‚Æ‚ð‚¨Š©‚ß‚µ‚Ü‚·B
+‚»‚Ì‚½‚ßAƒCƒ“ƒXƒg[ƒ‹‚Í•K—v‚Í‚ ‚è‚Ü‚¹‚ñ‚ªAÅV”Å‚Ì‚à‚Ì‚ª‚ ‚ê‚Î•Ê“r’u‚«Š·‚¦‚Ä—˜—p‚·‚é‚±‚Æ‚ð‚¨Š©‚ß‚µ‚Ü‚·B
 
 ### Chart.js
 ƒ\[ƒXƒR[ƒh‚Å—˜—p‚µ‚Ä‚¢‚éƒo[ƒWƒ‡ƒ“F2.8.0
@@ -99,19 +101,20 @@ AM2320ƒZƒ“ƒT[‚ð§Œä‚Å‚«‚éƒ‰ƒCƒuƒ‰ƒŠ[‚Å‚·B
 
 ![connection_diagram](https://github.com/shiguregaki/AM2320-WebGraph/blob/master/docs/connection_diagram.jpg)
 
-ESP8266 Ë AM2320
-
-- ÔüF 3V3 Ë VDD
-- ‰©FüF GPIO4 Ë SDA
-- •üF GND Ë GND
-- ”’üF GPIO5 Ë SCL
+| ƒƒCƒ„‚ÌF | ESP8266’[Žq | AM2320’[Žq |
+|:---|:---|:---|
+|Ô |3V3 |VDD |
+|‰© |GPIO4 |SDA |
+|• |GND |GND |
+|”’ |GPIO5 |SCL |
 
 AM2320‚ÌŽd—l‚Í
 [Digital Temperature and Humidity Sensor AM2320 Product Manual](https://github.com/shiguregaki/AM2320-WebGraph/blob/master/docs/AM2320.pdf)
 ‚ðŽQÆ
 
-ESP8266‚ÌGPIO‚ÍI2C‚É‘Î‰ž‚µ‚½’[Žq‚ð‘I‘ð‚·‚é‚±‚ÆB
-(Ž„‚ÍAESP8266‚ÌƒfƒtƒHƒ‹ƒg‚ÌI2C’[Žq‚ð—˜—p‚µ‚Ü‚µ‚½B)
+Wire.hƒ‰ƒCƒuƒ‰ƒŠ‚ðŽg‚¦‚ÎAESP8266‚Ì”CˆÓ‚ÌGPIOƒsƒ“‚ðI2C‚Å—˜—p‚Å‚«‚é‚æ‚¤‚Å‚·B
+‚µ‚©‚µAŽ©•ª‚ÌŠÂ‹«‚Å‚Í‚¤‚Ü‚­“®‚«‚Ü‚¹‚ñ‚Å‚µ‚½B
+‚»‚Ì‚½‚ßASDA_PIN‚ÆSCL_PIN‚ÍESP8266‚ÌƒfƒtƒHƒ‹ƒgI2Cƒsƒ“‚É‚·‚é‚±‚Æ‚ð‚¨Š©‚ß‚µ‚Ü‚·B
 
 ### 2.Arduino IDE‚É"ƒCƒ“ƒXƒg[ƒ‹‚ª•K—v‚Èƒ\ƒtƒgƒEƒFƒA"‚ðƒCƒ“ƒXƒg[ƒ‹‚µ‚Ü‚·B
 ƒCƒ“ƒXƒg[ƒ‹‚ª•K—v‚Èƒ\ƒtƒgƒEƒFƒA‚Í[‚±‚¿‚ç](#ƒCƒ“ƒXƒg[ƒ‹‚ª•K—v‚Èƒ\ƒtƒgƒEƒFƒA)
@@ -136,7 +139,7 @@ ESP8266‚ÌGPIO‚ÍI2C‚É‘Î‰ž‚µ‚½’[Žq‚ð‘I‘ð‚·‚é‚±‚ÆB
 ‚µ‚©‚µAŽ©•ª‚ÌŠÂ‹«‚Å‚Í‚¤‚Ü‚­“®‚«‚Ü‚¹‚ñ‚Å‚µ‚½B
 ‚»‚Ì‚½‚ßASDA_PIN‚ÆSCL_PIN‚ÍESP8266‚ÌƒfƒtƒHƒ‹ƒgI2Cƒsƒ“‚É‚·‚é‚±‚Æ‚ð‚¨Š©‚ß‚µ‚Ü‚·B
 
-¦¦AM2320ƒZƒ“ƒT[‚Ì“Ç‚ÝŽæ‚èŠÔŠu‚ÍƒNƒ‰ƒCƒAƒ“ƒg’[––‘¤‚ÅŒÅ’è‚Ì5ƒpƒ^[ƒ“‚µ‚©Ý’è‚Å‚«‚È‚¢‚æ‚¤‚É‚µ‚Ä‚¢‚Ü‚·A
+¦¦AM2320ƒZƒ“ƒT[‚Ì“Ç‚ÝŽæ‚èŠÔŠu‚ÍƒNƒ‰ƒCƒAƒ“ƒg’[––‘¤‚ÅŒÅ’è‚Ì5ƒpƒ^[ƒ“‚µ‚©Ý’è‚Å‚«‚È‚¢‚æ‚¤‚É‚µ‚Ä‚¢‚Ü‚·B
 (1s,5s,30s,60s,300s‚Ì‚Ç‚ê‚©)
 ‚»‚Ì‚½‚ßA‚»‚êˆÈŠO‚Ì’l‚ð“ü‚ê‚é‚Æ•s‹ï‡‚ª”­¶‚·‚é‰Â”\«‚ª‚ ‚è‚Ü‚·B
 
@@ -158,8 +161,7 @@ Arduino ESP8266 filesystem uploader‚ðŽg‚¦‚ÎAŽ©“®‚Åƒ\[ƒXƒR[ƒh‚ª‚ ‚éƒfƒBƒŒƒNƒgƒ
 ˆ³k‚µ‚È‚­‚Ä‚à“®‚­‚æ‚¤‚ÉƒR[ƒh‚Í‘‚¢‚Ä‚¢‚Ü‚·B
 
 ### 5.ESP8266Šî”Â‚Ì“dŒ¹‚ð“ü‚ê‚ÄAwifi‚ÌÝ’è‚ð‚µ‚Ü‚·B
-AP-Mode‚Ìê‡(ƒfƒtƒHƒ‹ƒg):
-
+#### AP-Mode‚Ìê‡(ƒfƒtƒHƒ‹ƒg):
 ƒAƒNƒZƒXƒ|ƒCƒ“ƒg‚ÉST’[––‚ª‚Â‚È‚ª‚é‚Ì‚ð‘Ò‚Á‚Ä‚¢‚Ü‚·B
 ƒAƒNƒZƒXƒ|ƒCƒ“ƒg‚ÌSSID‚ÍuESP8266 Access PointvAƒpƒXƒ[ƒh‚Íuesp8266-testv‚Å‚·B
 ƒVƒŠƒAƒ‹ƒ‚ƒjƒ^‚Å‚ÍÚ‘±‚ª¬Œ÷‚·‚ê‚ÎAˆÈ‰º‚Ì‚æ‚¤‚Éu[info] Access destination IP address: XXXXv‚Ì‚æ‚¤‚ÉƒAƒNƒZƒXæ‚ÌIPƒAƒhƒŒƒX‚ªo—Í‚³‚ê‚Ü‚·B
@@ -168,8 +170,7 @@ AP-Mode‚Ìê‡(ƒfƒtƒHƒ‹ƒg):
 
 ¦‚à‚µAƒR[ƒh‚Ìssid‚Æpassword‚ð•Ï‚¦‚Ä‚¢‚½‚çA‚»‚Ì’l‚É•Ï‚í‚Á‚Ä‚¢‚Ü‚·B
 
-ST-Mode‚Ìê‡:
-
+#### ST-Mode‚Ìê‡:
 Ž©“®‚ÅƒAƒNƒZƒXƒ|ƒCƒ“ƒg‚ÉÚ‘±‚µ‚Ü‚·B
 ƒVƒŠƒAƒ‹ƒ‚ƒjƒ^‚Å‚ÍÚ‘±‚ª¬Œ÷‚·‚ê‚ÎAˆÈ‰º‚Ì‚æ‚¤‚Éu[info] Access destination IP address: XXXXv‚Ì‚æ‚¤‚ÉƒAƒNƒZƒXæ‚ÌIPƒAƒhƒŒƒX‚ªo—Í‚³‚ê‚Ü‚·B
 
