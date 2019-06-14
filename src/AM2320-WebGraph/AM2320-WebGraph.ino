@@ -184,8 +184,8 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t lenght
       if (!setUpTimeIsComplete && payload[0]=='C' && payload[1]=='o' && payload[2]=='n' && payload[3]=='n' && payload[4] =='e' && payload[5] =='c' && payload[6] =='t'){
         String time_str[6] = {"\0"};
         uint32_t time_uint[6];
-        int index = split((const char *) &payload[8], ',', time_str);
-        for(int i = 0; i < index; i++){
+        int32_t index = split((const char *) &payload[8], ',', time_str);
+        for(int32_t i = 0; i < index; i++){
           time_uint[i] = (uint32_t) strtol(time_str[i].c_str(), NULL, 10);
         }
         setTime(time_uint[3], time_uint[4], time_uint[5] , time_uint[2], time_uint[1], time_uint[0]);
@@ -233,7 +233,7 @@ void read_sensor (void) {
       Serial.println(sendData_json);
       webSocket.broadcastTXT((const char *) sendData_json.c_str());
     }else{
-      int errorCode = am2320.getErrorCode();
+      int32_t errorCode = am2320.getErrorCode();
       switch (errorCode) {
         case 1: Serial.println("[err] Sensor is offline"); break;
         case 2: Serial.println("[err] CRC validation failed."); break;
@@ -291,11 +291,11 @@ String getFilePath(String path) {
 }
 
 /* Split string per delimiter. */
-int split(String data, char delimiter, String *dst){
-    int index = 0;
-    int arraySize = (sizeof(data)/sizeof((data)[0]));  
-    int datalength = data.length();
-    for (int i = 0; i < datalength; i++) {
+int32_t split(String data, char delimiter, String *dst){
+    int32_t index = 0;
+    int32_t arraySize = (sizeof(data)/sizeof((data)[0]));  
+    int32_t datalength = data.length();
+    for (int32_t i = 0; i < datalength; i++) {
         char tmp = data.charAt(i);
         if ( tmp == delimiter ) {
             index++;
