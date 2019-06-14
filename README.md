@@ -178,6 +178,19 @@ Arduino ESP8266 filesystem uploader‚ğg‚¦‚ÎA©“®‚Åƒ\[ƒXƒR[ƒh‚ª‚ ‚éƒfƒBƒŒƒNƒgƒ
 
 ¦ESP8266‚ª11b/g/n‚µ‚©ƒTƒ|[ƒg‚µ‚Ä‚¢‚È‚¢‚½‚ßAÚ‘±æ‚ÌƒAƒNƒZƒXƒ|ƒCƒ“ƒg‚Í2.4GHz‘Ñ‚Ì‚à‚Ì‚ÉÚ‘±‚·‚é•K—v‚ª‚ ‚è‚Ü‚·B
 
+### 6.ƒNƒ‰ƒCƒAƒ“ƒg’[––‚Ìƒuƒ‰ƒEƒU‚©‚çƒAƒNƒZƒXæ‚ÌIPƒAƒhƒŒƒX‚ÉƒAƒNƒZƒX‚µ‚Ü‚·B
+ƒuƒ‰ƒEƒU‚ÌŒŸõƒtƒH[ƒ€‚Ì‚Æ‚±‚ë‚ÉAƒAƒNƒZƒXæ‚ÌIPƒAƒhƒŒƒX"X.X.X.X"‚ğ“ü—Í‚·‚ê‚Î‰·“x‚Æ¼“x‚ğ•\¦‚·‚é‰æ–Ê‚ª•\¦‚³‚ê‚é‚Í‚¸‚Å‚·B
+
+![display_capture](https://github.com/shiguregaki/AM2320-WebGraph/blob/master/docs/display_capture.png)
+
+ã•”‚É‚ ‚éÂ”wŒi•”•ª‚ÉƒŠƒAƒ‹ƒ^ƒCƒ€‚Ì‰·“x‚Æ¼“x’l‚ğ•\¦‚³‚ê‚Ü‚·B
+ƒOƒ‰ƒt‚Ì‚Æ‚±‚ë‚É‚±‚ê‚Ü‚Å‚Ì‰·“x‚Æ¼“xî•ñ‚Ì—š—ğ‚ª•\¦‚³‚ê‚Ü‚·B
+
+intervalƒ‰ƒWƒIƒ{ƒ^ƒ“‚Å‚ÍA‰·¼“xî•ñ‚ÌXVŠÔ‚ğ•ÏX‚Å‚«‚Ü‚·B(1s,5s,30s,60s,300s‚Ì‚İ)
+
+Reset graphƒ{ƒ^ƒ“‚ğƒNƒŠƒbƒN‚·‚é‚ÆAƒOƒ‰ƒt‚ªƒŠƒZƒbƒg‚³‚ê‚Ü‚·B
+
+
 # ƒ‰ƒCƒZƒ“ƒX
 [MIT](https://github.com/shiguregaki/sample/blob/master/03_ESP8266_control_LED_by_websocket/LICENSE)
 
