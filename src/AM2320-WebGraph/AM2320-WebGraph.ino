@@ -33,6 +33,8 @@ Ticker timer;
 bool setUpTimeIsComplete = false;
 float thermo_f = 0;
 float hygro_f = 0;
+uint32_t currentSendInterval;
+bool sendCurrentSendInterval(int8_t num = -1);
 
 /************************************************ SETUP ************************************************/
 
@@ -122,7 +124,8 @@ void setupServer() {
 void setupTimer(){
   Serial.println("[info] Execute setupTimer() function.");
   setTime(00, 00, 00, 1, 1, 1970);
-  timer.attach(READ_INTERVAL, read_sensor);
+  currentSendInterval = READ_INTERVAL;
+  timer.attach(currentSendInterval, read_sensor);
   Serial.println("[info] Timer setup was complete.");Serial.println("");
 }
 
@@ -170,7 +173,9 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t lenght
       break;
     case WStype_CONNECTED:{
       IPAddress ip = webSocket.remoteIP(num);
-      Serial.printf("[info] [%u] Connected from %d.%d.%d.%d url: %s\n", num, ip[0], ip[1], ip[2], ip[3], payload);   
+      Serial.printf("[info] [%u] Connected from %d.%d.%d.%d url: %s\n", num, ip[0], ip[1], ip[2], ip[3], payload);
+      // Send currentSendInterval to client.
+      sendCurrentSendInterval(num);
     }
       break;
     case WStype_TEXT:{
@@ -187,10 +192,12 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t lenght
         Serial.printf("[info] setTime: %d/%d/%d %d:%d:%d\n", time_uint[0], time_uint[1], time_uint[2], time_uint[3], time_uint[4], time_uint[5] );
         setUpTimeIsComplete = true;
       }else if(payload[0] == '#'){
-        uint32_t interval = (uint32_t) strtol((const char *) &payload[1], NULL, 10);
-        Serial.printf("[info] setIntervalTime: %d\n", interval);
+        currentSendInterval = (uint32_t) strtol((const char *) &payload[1], NULL, 10);
+        Serial.printf("[info] setIntervalTime: %d\n", currentSendInterval);
         timer.detach();
-        timer.attach(interval, read_sensor);
+        timer.attach(currentSendInterval, read_sensor);
+        // Send currentSendInterval to connected client.
+        sendCurrentSendInterval();
       }
     }
       break;
@@ -204,27 +211,27 @@ void read_sensor (void) {
     if(am2320.measure()){
       thermo_f = am2320.getTemperature();
       hygro_f = am2320.getHumidity();
-      // Send message to client. (content is JSON type)
-      String sendData_str = "{ \"time\": \""
-                            + String(year())
-                            + '/'
-                            + String(month())
-                            + '/'
-                            + String(day())
-                            + ' '
-                            + String(hour())
-                            + ':'
-                            + String(minute())
-                            + ':'
-                            + String(second())
-                            + "\", \"thermo\": \""
-                            + String(thermo_f)
-                            + "\", \"hygro\": \""
-                            + String(hygro_f)
-                            + "\" }";
-      Serial.print("[info] sendData_str: ");
-      Serial.println(sendData_str);
-      webSocket.broadcastTXT((const char *) sendData_str.c_str());
+      // Send measured data to client. (content is JSON type)
+      String sendData_json = "{ \"time\": \""
+                             + String(year())
+                             + '/'
+                             + String(month())
+                             + '/'
+                             + String(day())
+                             + ' '
+                             + String(hour())
+                             + ':'
+                             + String(minute())
+                             + ':'
+                             + String(second())
+                             + "\", \"thermo\": \""
+                             + String(thermo_f)
+                             + "\", \"hygro\": \""
+                             + String(hygro_f)
+                             + "\" }";
+      Serial.print("[info] sendData_json, measured data: ");
+      Serial.println(sendData_json);
+      webSocket.broadcastTXT((const char *) sendData_json.c_str());
     }else{
       int errorCode = am2320.getErrorCode();
       switch (errorCode) {
@@ -297,4 +304,21 @@ int split(String data, char delimiter, String *dst){
         else dst[index] += tmp;
     }
     return (index + 1);
+}
+
+/* Send current interval time to send to WebSocket cliant. 
+   If num is negative or not value, it will broadcast.*/
+bool sendCurrentSendInterval(int8_t num){
+  bool ret = false;
+  String sendData_json = "{ \"currentSendInterval\": \""
+                          + String(currentSendInterval)
+                          + "\" }";
+  Serial.printf("[info] sendData_json, currentSendInterval[num=%d]: ",num);
+  Serial.println(sendData_json);
+  if(num<0){
+    ret = webSocket.broadcastTXT((const char *) sendData_json.c_str());
+  }else{
+    ret = webSocket.sendTXT(num, (const char *) sendData_json.c_str());
+  }
+  return ret;
 }
