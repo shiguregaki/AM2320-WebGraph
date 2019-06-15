@@ -114,7 +114,7 @@ But I can not have run it in my enviroment.
 So I reccomend that default I2C pins are used in SDA_PIN and SCL_PIN of ESC8266.
 
 ### 2.Install "Required software" in Arduino IDE.
-"Required software" is [link](#required-software)
+"Required software" is [link](#required-software).
 
 ### 3.Write this code on the ESP8266 board with Arduino IDE.
 The code to write is "AM2320-WebGraph.ino".
