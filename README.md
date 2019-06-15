@@ -3,11 +3,201 @@ AM2320-WebGraph
 ---
 English
 ---
+
 I created a web graph that shows the value of the AM2320 sensor in arudino wifi module(ESP8266).
+The AM2320 sensor is heated with a dryer and it is displayed in real time.
+
+![demo](https://github.com/shiguregaki/AM2320-WebGraph/blob/master/docs/display_AM2320_sensor.gif)
+
+# ŠT—v
+I created this code for coding practice, becouse I would like to have checked about the process to display realtime Arduino's output by using WebSocket.
+
+It display realtime information on the AM2320 thermo/hygro sensor connected to the ESP8266 on the client terminal browser.
+
+This code supports the access point mode (AP mode) and the station mode (ST mode) as the operation of ESP8266.
+The default is AP mode.
+If you want to use in ST mode, put your access point information in "myssid" and "mypasswaord" in the code.
+If there is access point specified at startup, it will connect automatically your access point.
+
+¦Because the ESP 8266 only supports 11b/g/n, the access point to connect needs to be connected to the 2.4 GHz band.
+
+# Requirement
+## Required device
+### arudino wifi module(ESP8266)
+If purchased in Japan, it works on the following boards:
+
+- [“dq‘¾˜Y ESP-WROOM-02ŠJ”­ƒ{[ƒh 2.4 GHz Wi-Fiƒ‚ƒWƒ…[ƒ‹ MicroUSB](https://www.amazon.co.jp/gp/product/B071DY11SB/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B071DY11SB&linkCode=as2&tag=shiguregaki02-22&linkId=131ae4b9a00ef3b7517980a81ed41d91)  
+- [‚d‚r‚o|‚v‚q‚n‚n‚l|‚O‚QŠJ”­ƒ{[ƒh](http://akizukidenshi.com/catalog/g/gK-12236/)
+- [ESPr DeveloperiESP-WROOM-02ŠJ”­ƒ{[ƒhj](https://www.switch-science.com/catalog/2500/)
+
+### Digital Temperature and Humidity Sensor(AM2320)
+If you purchase in Japan, you can purchase at Akizuki denshi.
+
+- [‰·¼“xƒZƒ“ƒT ƒ‚ƒWƒ…[ƒ‹ ‚`‚l‚Q‚R‚Q‚O](http://akizukidenshi.com/catalog/g/gM-08663/)
+
+If you buy on a global site, you can also buy Alibaba or Banggood.com.
+
+## Required software
+The following software are required to be installed.
+
+### Arduino IDE
+Install Arduino IDE on your development PC.
+
+[https://www.arduino.cc/en/Main/Software](https://www.arduino.cc/en/Main/Software)
+
+### (tool) ESP8266 core for Arduino
+The default configuration of the Arduino IDE does not support the ESP 8266 board.
+Therefore, it is necessary to import ***ESP8266 core for Arduino*** into Arduino IDE.
+
+[ESP8266 core for Arduino](https://github.com/esp8266/Arduino)
+
+### (tool) Arduino ESP8266 filesystem uploader
+It is file updater for Arduino ESP8266.
+You can download it following URL.
+
+[Arduino ESP8266 filesystem uploader](https://github.com/esp8266/arduino-esp8266fs-plugin)
+
+### (library) Links2004/arduinoWebSockets
+WebSocket library for Arduino.
+You can download it following URL.
+
+[Links2004/arduinoWebSockets](https://github.com/Links2004/arduinoWebSockets)
+
+### (library) PaulStoffregen/Time
+Time managemant library for Arduino.
+You can download it following URL.
+
+[PaulStoffregen/Time](https://github.com/PaulStoffregen/Time)
+
+### (library) hibikiledo/AM2320
+It is a library that can control AM2320 sensor.
+AM2320 is enable to get temperature and humidity information.
+
+[hibikiledo/AM2320](https://github.com/hibikiledo/AM2320)
+
+## Included software
+The following software are NOT required to be installed, becuse there are included in code.
+But, it is recommended to replace the latest version if it is available.
+
+### Chart.js
+Version used in code:2.8.0
+
+You can download it following URL.
+
+[Chart.js](https://www.chartjs.org/)
+
+### Moment.js
+Version used in code:2.24.0
+
+You can download it following URL.
+
+[Moment.js](https://momentjs.com/)
+
+# Usage
+### 1.Build the connection as the fllowing figure.
+
+![connection_diagram](https://github.com/shiguregaki/AM2320-WebGraph/blob/master/docs/connection_diagram.jpg)
+
+| Wire color | ESP8266 pin | AM2320 pin |
+|:---|:---|:---|
+|Red |3V3 |VDD |
+|Yellow |GPIO4 |SDA |
+|Black |GND |GND |
+|White |GPIO5 |SCL |
+
+The specification of AM2320 is referred to 
+[Digital Temperature and Humidity Sensor AM2320 Product Manual](https://github.com/shiguregaki/AM2320-WebGraph/blob/master/docs/AM2320.pdf).
+
+If use Wire.h, it seems that any GPIO pin of the ESP8266 is enabled to be used in I2C.
+But I can not have run it in my enviroment.
+So I reccomend that default I2C pins are used in SDA_PIN and SCL_PIN of ESC8266.
+
+### 2.Install "Required software" in Arduino IDE.
+"Required software" is [link](#Required software)
+
+### 3.Write this code on the ESP8266 board with Arduino IDE.
+The code to write is "AM2320-WebGraph.ino".
+
+The parameters are below. Please change as appropriate for your environment.
+
+| Parameters | Description | Default value |
+|:---|:---|:---|
+|ssid |The name of SSID in case used AP-Mode. |"ESP8266 Access Point" |
+|password |The password in case used AP-Mode. |"esp8266-test" |
+|myssid |The name of SSID in case used ST-Mode.  Please change as appropriate for your environment. |"The ssid name of your AP" |
+|mypassword |The password in case used ST-Mode.  Please change as appropriate for your environment. |"The password of your AP" |
+|CPU_MHZ |ESP8266 CPU frequency.  Please change as appropriate for your environment. |160 |
+|SDA_PIN ¦ |The number of GPIO pin on ESP8266 connected to AM2320 SDA pin. |4 |
+|SCL_PIN ¦ |The number of GPIO pin on ESP8266 connected to AM2320 SCL pin. |5 |
+|READ_INTERVAL ¦¦ |The interval time to read AM2320 sensor.(Any one of 1s, 5s, 30s, 60s and 300s) |5 |
+
+¦ If use Wire.h, it seems that any GPIO pin of the ESP8266 is enabled to be used in I2C.
+But I can not have run it in my enviroment.
+So I reccomend that default I2C pins are used in SDA_PIN and SCL_PIN of ESC8266.
+
+¦¦ The interval time to read AM2320 sensor is fixed as 5 patterns.(Any one of 1s, 5s, 30s, 60s and 300s)
+So entering any other value may cause problems.
+
+### 4.Uploade files for webserver to ESP8266.
+Use the Arduino ESP8266 filesystem uploader.
+It will automatically read / upload data from the source code directory.
+
+The files to upload is below.
+
+| File | Description |
+|:---|:---|
+|Chart.min.js.gz |OSS script used to draw graphs |
+|index.html.gz |Specify the screen when accessing HTML |
+|main.css.gz |Specify screen design |
+|moment.min.js.gz |OSS script used to manage time |
+|WebSocket.js.gz |Specify the client operation of WebSocket |
+
+All files are compressed with ".gz" to reduce file size.
+The code is written to work without compression.
+
+### 5.Turn on the ESP8266 board and configure the wifi settings.
+
+#### In AP-Mode(default): 
+ESP8266 waits to connect ST-device.
+SSID name is "ESP8266 Access Point", and password is "esp8266-test".
+If access is sucsess, the IP address of the access destination is output with "[info] Access destination IP address: XXXX" on serial monitor.
+
+![Capture_connect_AP](https://github.com/shiguregaki/AM2320-WebGraph/blob/master/docs/Capture_connect_AP.png)
+
+¦If you change "ssid" and "password" in the code, SSID name and password are changed to input value.
+
+#### In ST-Mode: 
+ESP8266 automatically connects to access point.
+If access is sucsess, the IP address of the access destination is output with "[info] Access destination IP address: XXXX" on serial monitor.
+
+![Capture_connect_ST](https://github.com/shiguregaki/AM2320-WebGraph/blob/master/docs/Capture_connect_ST.png)
+
+¦Because the ESP 8266 only supports 11b/g/n, the access point to connect needs to be connected to the 2.4 GHz band.
+
+### 6.Access the IP address of the access destination from the browser of the cliebt terminal.
+If you input the IP address of the access destinatio in browser search form, you will show the screen to display temperature and humidity.
+
+![display_capture](https://github.com/shiguregaki/AM2320-WebGraph/blob/master/docs/display_capture.png)
+
+#### Screen description:
+The blue background at the top shows real-time temperature and humidity values.
+The history of past temperature and humidity information is displayed at the graph.
+
+The interval radio button allows you to change the update time of temperature and humidity information.
+(Only 1s, 5s, 30s, 60s and 300s)
+
+The Reset graph button allows you to reset the graph.
+
+# Licence
+[MIT](https://github.com/shiguregaki/AM2320-WebGraph/blob/master/LICENSE)
+
+# Author
+[shiguregaki](https://github.com/shiguregaki)
 
 ---
 Japanese
 ---
+
 ‚±‚ÌƒR[ƒh‚Íarudino wifiƒ‚ƒWƒ…[ƒ‹‚ÌESP8266‚ÅAM2320‚ğWebƒOƒ‰ƒt‰»‚·‚é‚à‚Ì‚Å‚·B
 AM2320ƒZƒ“ƒT[‚ğƒhƒ‰ƒCƒ„[‚Å‰·‚ß‚Ä‚¨‚èA‚»‚ê‚ªƒŠƒAƒ‹ƒ^ƒCƒ€‚É•\¦‚³‚ê‚Ä‚¢‚Ü‚·B
 
@@ -135,11 +325,11 @@ Wire.hƒ‰ƒCƒuƒ‰ƒŠ‚ğg‚¦‚ÎAESP8266‚Ì”CˆÓ‚ÌGPIOƒsƒ“‚ğI2C‚Å—˜—p‚Å‚«‚é‚æ‚¤‚Å‚·B
 |SCL_PIN ¦ |AM2320‚ÌSCL’[q‚ÆÚ‘±‚·‚éESP8266‘¤‚ÌGPIOƒsƒ“”Ô† |5 |
 |READ_INTERVAL ¦¦ |AM2320ƒZƒ“ƒT[‚Ì“Ç‚İæ‚èŠÔŠuB(1s,5s,30s,60s,300s‚Ì‚Ç‚ê‚©) |5 |
 
-¦Wire.hƒ‰ƒCƒuƒ‰ƒŠ‚ğg‚¦‚ÎAESP8266‚Ì”CˆÓ‚ÌGPIOƒsƒ“‚ğI2C‚Å—˜—p‚Å‚«‚é‚æ‚¤‚Å‚·B
+¦ Wire.hƒ‰ƒCƒuƒ‰ƒŠ‚ğg‚¦‚ÎAESP8266‚Ì”CˆÓ‚ÌGPIOƒsƒ“‚ğI2C‚Å—˜—p‚Å‚«‚é‚æ‚¤‚Å‚·B
 ‚µ‚©‚µA©•ª‚ÌŠÂ‹«‚Å‚Í‚¤‚Ü‚­“®‚«‚Ü‚¹‚ñ‚Å‚µ‚½B
 ‚»‚Ì‚½‚ßASDA_PIN‚ÆSCL_PIN‚ÍESP8266‚ÌƒfƒtƒHƒ‹ƒgI2Cƒsƒ“‚É‚·‚é‚±‚Æ‚ğ‚¨Š©‚ß‚µ‚Ü‚·B
 
-¦¦AM2320ƒZƒ“ƒT[‚Ì“Ç‚İæ‚èŠÔŠu‚ÍƒNƒ‰ƒCƒAƒ“ƒg’[––‘¤‚ÅŒÅ’è‚Ì5ƒpƒ^[ƒ“‚µ‚©İ’è‚Å‚«‚È‚¢‚æ‚¤‚É‚µ‚Ä‚¢‚Ü‚·B
+¦¦ AM2320ƒZƒ“ƒT[‚Ì“Ç‚İæ‚èŠÔŠu‚ÍƒNƒ‰ƒCƒAƒ“ƒg’[––‘¤‚ÅŒÅ’è‚Ì5ƒpƒ^[ƒ“‚µ‚©İ’è‚Å‚«‚È‚¢‚æ‚¤‚É‚µ‚Ä‚¢‚Ü‚·B
 (1s,5s,30s,60s,300s‚Ì‚Ç‚ê‚©)
 ‚»‚Ì‚½‚ßA‚»‚êˆÈŠO‚Ì’l‚ğ“ü‚ê‚é‚Æ•s‹ï‡‚ª”­¶‚·‚é‰Â”\«‚ª‚ ‚è‚Ü‚·B
 
@@ -183,6 +373,7 @@ Arduino ESP8266 filesystem uploader‚ğg‚¦‚ÎA©“®‚Åƒ\[ƒXƒR[ƒh‚ª‚ ‚éƒfƒBƒŒƒNƒgƒ
 
 ![display_capture](https://github.com/shiguregaki/AM2320-WebGraph/blob/master/docs/display_capture.png)
 
+#### ‰æ–Ê‚Ìà–¾:
 ã•”‚É‚ ‚éÂ”wŒi•”•ª‚ÉƒŠƒAƒ‹ƒ^ƒCƒ€‚Ì‰·“x‚Æ¼“x’l‚ğ•\¦‚³‚ê‚Ü‚·B
 ƒOƒ‰ƒt‚Ì‚Æ‚±‚ë‚É‚±‚ê‚Ü‚Å‚Ì‰·“x‚Æ¼“xî•ñ‚Ì—š—ğ‚ª•\¦‚³‚ê‚Ü‚·B
 
@@ -192,7 +383,7 @@ Reset graphƒ{ƒ^ƒ“‚ğƒNƒŠƒbƒN‚·‚é‚ÆAƒOƒ‰ƒt‚ªƒŠƒZƒbƒg‚³‚ê‚Ü‚·B
 
 
 # ƒ‰ƒCƒZƒ“ƒX
-[MIT](https://github.com/shiguregaki/sample/blob/master/03_ESP8266_control_LED_by_websocket/LICENSE)
+[MIT](https://github.com/shiguregaki/AM2320-WebGraph/blob/master/LICENSE)
 
 # ì¬Ò
 [shiguregaki](https://github.com/shiguregaki)
