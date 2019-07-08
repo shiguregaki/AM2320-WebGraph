@@ -1,10 +1,7 @@
 AM2320-WebGraph
-
----
-English
 ---
 
-I created a web graph that shows the value of the AM2320 sensor in arudino wifi module(ESP8266).
+I created a web graph that shows the value of the AM2320 sensor in Arduino wifi module(ESP8266).
 The AM2320 sensor is heated with a dryer and it is displayed in real time.
 
 ![demo](/docs/display_AM2320_sensor.gif)
@@ -23,7 +20,7 @@ If there is access point specified at startup, it will connect automatically you
 
 # Requirement
 ## Required device
-### arudino wifi module(ESP8266)
+### Arduino wifi module(ESP8266)
 If purchased in Japan, it works on the following boards:
 
 - [“dq‘¾˜Y ESP-WROOM-02ŠJ”­ƒ{[ƒh 2.4 GHz Wi-Fiƒ‚ƒWƒ…[ƒ‹ MicroUSB](https://www.amazon.co.jp/gp/product/B071DY11SB/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B071DY11SB&linkCode=as2&tag=shiguregaki02-22&linkId=131ae4b9a00ef3b7517980a81ed41d91)  
@@ -36,6 +33,13 @@ If you purchase in Japan, you can purchase at Akizuki denshi.
 - [‰·¼“xƒZƒ“ƒT ƒ‚ƒWƒ…[ƒ‹ ‚`‚l‚Q‚R‚Q‚O](http://akizukidenshi.com/catalog/g/gM-08663/)
 
 If you purchase on a global site, you can also buy Alibaba or Banggood.com.
+
+### Other parts
+
+| Parts | MPN | Num |
+|:---|:---|:---|
+|bread board |- |1 |
+|Jumper cord(male-female) |- |4 |
 
 ## Required software
 The following software are required to be installed.
@@ -176,7 +180,7 @@ If access is sucsess, the IP address of the access destination is output with "[
 ¦Because the ESP 8266 only supports 11b/g/n, the access point to connect needs to be connected to the 2.4 GHz band.
 
 ### 6.Access the IP address of the access destination from the browser of the cliebt terminal.
-If you input the IP address of the access destinatio in browser search form, you will show the screen to display temperature and humidity.
+If you input the IP address of the access destination in browser search form, you will show the screen to display temperature and humidity.
 
 ![display_capture](/docs/display_capture.png)
 
@@ -196,10 +200,11 @@ The Reset graph button allows you to reset the graph.
 [shiguregaki](https://github.com/shiguregaki)
 
 ---
+
 Japanese
 ---
 
-‚±‚ÌƒR[ƒh‚Íarudino wifiƒ‚ƒWƒ…[ƒ‹‚ÌESP8266‚ÅAM2320‚ğWebƒOƒ‰ƒt‰»‚·‚é‚à‚Ì‚Å‚·B
+‚±‚ÌƒR[ƒh‚ÍArduino wifiƒ‚ƒWƒ…[ƒ‹‚ÌESP8266‚ÅAM2320‚ğWebƒOƒ‰ƒt‰»‚·‚é‚à‚Ì‚Å‚·B
 AM2320ƒZƒ“ƒT[‚ğƒhƒ‰ƒCƒ„[‚Å‰·‚ß‚Ä‚¨‚èA‚»‚ê‚ªƒŠƒAƒ‹ƒ^ƒCƒ€‚É•\¦‚³‚ê‚Ä‚¢‚Ü‚·B
 
 ![demo](/docs/display_AM2320_sensor.gif)
@@ -218,7 +223,7 @@ ST-Mode‚Åg—p‚µ‚½‚¢ê‡‚ÍAƒR[ƒh“à‚É‚ ‚é"myssid"‚Æ"mypassword"‚É‚²©•ª‚ÌƒAƒNƒZƒ
 
 # •K—v‚È‚±‚Æ
 ## •K—v‚ÈƒfƒoƒCƒX
-### arudino wifi module(ESP8266)
+### Arduino wifi module(ESP8266)
 “ú–{‚Å‚Ìw“ü‚È‚çAˆÈ‰º‚Ìƒ{[ƒhã‚Å“®ì‚µ‚Ü‚·B
 
 - [“dq‘¾˜Y ESP-WROOM-02ŠJ”­ƒ{[ƒh 2.4 GHz Wi-Fiƒ‚ƒWƒ…[ƒ‹ MicroUSB](https://www.amazon.co.jp/gp/product/B071DY11SB/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B071DY11SB&linkCode=as2&tag=shiguregaki02-22&linkId=131ae4b9a00ef3b7517980a81ed41d91)  
@@ -231,6 +236,13 @@ ST-Mode‚Åg—p‚µ‚½‚¢ê‡‚ÍAƒR[ƒh“à‚É‚ ‚é"myssid"‚Æ"mypassword"‚É‚²©•ª‚ÌƒAƒNƒZƒ
 - [‰·¼“xƒZƒ“ƒT ƒ‚ƒWƒ…[ƒ‹ ‚`‚l‚Q‚R‚Q‚O](http://akizukidenshi.com/catalog/g/gM-08663/)
 
 ƒOƒ[ƒoƒ‹‚ÈƒTƒCƒg‚Åw“ü‚È‚çAAlibaba‚âBanggood.com‚È‚Ç‚Å‚àw“ü‚Å‚«‚Ü‚·B
+
+### ‚»‚Ì‘¼•”•i
+
+| •”•i | Œ^”Ô | ŒÂ” |
+|:---|:---|:---|
+|ƒuƒŒƒbƒhƒ{[ƒh |- |1 |
+|ƒWƒƒƒ“ƒp[ƒR[ƒh(ƒIƒX-ƒƒX) |- |4 |
 
 ## ƒCƒ“ƒXƒg[ƒ‹‚ª•K—v‚Èƒ\ƒtƒgƒEƒFƒA
 ### Arduino IDE
